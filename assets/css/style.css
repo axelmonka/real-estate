@@ -1,5 +1,13 @@
 body {
-    background: #34495e;
+    background: #FAEBD7;
     color: white;
     padding: 50px;
+}
+h1{
+    color: black;
+    margin-left: 100px;
+    
+}
+p{
+    color: black;
 }
