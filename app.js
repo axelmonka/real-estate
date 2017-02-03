@@ -30,7 +30,14 @@ var k
 //makes the server respond to the '/' route and serving the 'home.ejs' template in the 'views' directory
 app.get( '/', function ( req, res ) {
     res.render( 'home', {
-        message: 'Entrez l\'url du bien à évaluer'
+        message: '',
+        message2: '',
+        message3: '',
+        message4: '',
+        message5: '',
+        message6: '',
+        message7: '',
+        message8: ''
     });
 });
 
@@ -59,37 +66,79 @@ app.get( '/process', function ( req, res ) {
             request( 'https://www.meilleursagents.com/prix-immobilier/' + data.Ville.toLowerCase() + '-' + data.Code, function ( error, response, body ) {
                 if ( !error && response.statusCode == 200 ) {
                     var $$ = cheerio.load( body )
-                    var Meanprice = $$( 'div.small-4.medium-2.columns.prices-summary__cell--median' ).eq( 0 ).text()
-                    Meanprice = Meanprice.split( ' ' )[12]
-                    var MeanpriceMaison = $$( 'div.small-4.medium-2.columns.prices-summary__cell--muted' ).eq( 0 ).text()
-                    MeanpriceMaison = Meanprice.split( ' ' )[12]
-                    Meanprice = Meanprice.replace( ' ', '' )
+                    var Meanprice = $$( 'div.small-4.medium-2.columns.prices-summary__cell--median' ).eq( 0 ).text().replace( '€', '' ).replace( /\s/g, '' )
                     Meanprice = parseFloat( Meanprice )
+                    var MeanpriceMaison = $$( 'div.small-4.medium-2.columns.prices-summary__cell--muted' ).eq( 0 ).text().replace( '€', '' ).replace( /\s/g, '' )
+                    MeanpriceMaison = parseFloat( MeanpriceMaison )
                     data.price = parseInt( data.price )
                     if ( data.Type == 'Appartement' ) {
                         if ( Meanprice > data.price ) {
                             res.render( 'home', {
-                                message: 'Resultat : It is a good deal.' + '   Prix au m2 moyen : ' + Meanprice + ' € ' + '   Prix au m2 du bien : ' + data.price + ' € '
+                                message: '',
+                                message2: 'Resultat',
+                                message3: 'Adresse : ' + data.adrresse,
+                                message4: 'Type de bien : ' + data.Type,
+                                message5: 'Surface : ' + data.surface,
+                                message6: 'Prix au m2 moyen dans cette ville : ' + Meanprice + '€',
+                                message7: 'Prix au m2 : ' + data.price + '€',
+                                message8: ' Good Deal'
+
                             });
                         }
                         else {
                             res.render( 'home', {
-                                message: 'Résultat : It is not a good deal.' + '   Prix au m2 moyen : ' + Meanprice + ' € ' + '   Prix au m2 du bien : ' + data.price + ' € '
+                                message: '',
+                                message2: 'Resultat : It is not a good deal.',
+                                message3: 'Adresse : ' + data.adrresse,
+                                message4: 'Type de bien : ' + data.Type,
+                                message5: 'Surface : ' + data.surface,
+                                message6: 'Prix au m2 moyen dans cette ville : ' + Meanprice + '€',
+                                message7: 'Prix au m2 : ' + data.price + '€',
+                                message8: ' Bad Deal'
+
                             });
                         }
                     }
                     else {
                         if ( MeanpriceMaison > data.price ) {
                             res.render( 'home', {
-                                message: 'Resultat : It is a good deal.' + '   Prix au m2 moyen : ' + MeanpriceMaison + ' € ' + '   Prix au m2 du bien : ' + data.price + ' € '
+                                message: '',
+                                message2: 'Resultat',
+                                message3: 'Adresse : ' + data.adrresse,
+                                message4: 'Type de bien : ' + data.Type,
+                                message5: 'Surface : ' + data.surface,
+                                message6: 'Prix au m2 moyen dans cette ville : ' + MeanpriceMaison + '€',
+                                message7: 'Prix au m2 : ' + data.price + '€',
+                                message8: ' Bad Deal'
+
                             });
                         }
                         else {
                             res.render( 'home', {
-                                message: 'Resultat : It is not a good deal.' + '   Prix au m2 moyen : ' + MeanpriceMaison + ' € ' + '   Prix au m2 du bien : ' + data.price + ' € '
+                                message: '',
+                                message2: 'Resultat',
+                                message3: 'Adresse : ' + data.adrresse,
+                                message4: 'Type de bien : ' + data.Type,
+                                message5: 'Surface : ' + data.surface,
+                                message6: 'Prix au m2 moyen dans cette ville : ' + MeanpriceMaison + '€',
+                                message7: 'Prix au m2 : ' + data.price + '€',
+                                message8: ' Good Deal'
                             });
                         }
                     }
+                }
+                else {
+                    res.render( 'home', {
+                        message: 'Impossible de charger la page',
+                        message2: '',
+                        message3: '',
+                        message4: '',
+                        message5: '',
+                        message6: '',
+                        message7: '',
+                        message8: ''
+                    })
+
                 }
             })
         }

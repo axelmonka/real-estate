@@ -5,9 +5,22 @@ body {
 }
 h1{
     color: black;
-    margin-left: 100px;
+    margin-left: 400px;
+    margin-bottom: 200px;
     
 }
 p{
     color: black;
+    size: 12px;
+}
+
+form{
+    margin: 100px;
+}
+
+div{
+    margin: 100px;
+    margin-top: 10px;
+    color: black;
+    size: 12px;
 }

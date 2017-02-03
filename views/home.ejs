@@ -3,6 +3,9 @@
 
 <head>
     <title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 
@@ -14,10 +17,14 @@
         <%= message %>
     </p>
     <form method = "get" action = "/process">
-        <input type="text"
+        <input type="text" class="form-control" placeholder="Entrez l'url"
             name = "URLLBC">
-        <button type = "submit">
+       <input class="btn btn-default" type="submit" value="Submit">
     </form>
+    <div class="row">
+        <div class="col-xs-6 col-sm-3"><br><%= message3 %></br><br><%= message4 %></br><br><%= message5 %></br><br><%= message6 %></br><br><%= message7 %></div>
+        <div class="col-xs-6 col-sm-3"><br><%= message2 %></br><br><%= message8 %></br></div>
+    </div>
 </body>
 
 </html>
